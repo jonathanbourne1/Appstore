@@ -26,8 +26,8 @@ const ImageButton: FC<{}> = ({title, price, navigation, item}) => {
 
 const styles = StyleSheet.create({
   imageButton: {
-    borderBottomEndRadius: 20,
-    borderBottomLeftRadius: 20,
+    borderBottomEndRadius: 15,
+    borderBottomLeftRadius: 15,
     width: '90%',
     height: '30%',
     backgroundColor: 'rgba(0,0,0,0.5)',
