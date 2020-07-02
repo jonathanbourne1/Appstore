@@ -1,10 +1,19 @@
 import React, {FC} from 'react';
-import {View, Text, StyleSheet, FlatList, Button} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Button,
+  Dimensions,
+} from 'react-native';
 //redux
 import {connect} from 'react-redux';
 //COMPONENTS
 import ItemProduct from '../../components/shop/itemProduct';
 import Header from '../../components/shop/header';
+//dimensions
+const {width, height} = Dimensions.get('screen');
 //INTERFACES
 interface ItemData {
   item: {title: string};
@@ -21,9 +30,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     flex: 1,
-  },
-  flatlist: {
-    marginBottom: 60,
   },
 });
 //FUNCTIONS FROM REDUX
@@ -47,12 +53,13 @@ const ProductsOverView: FC<Props> = (props) => {
         <View>
           <Header />
         </View>
-        <View style={styles.flatlist}>
+        <View style={{height: height / 1.39}}>
           <FlatList
             data={LISTOFPRODUCTS}
-            renderItem={(itemData) => (
-              <ItemProduct item={itemData.item} navigation={props.navigation} />
+            renderItem={(itemdata) => (
+              <ItemProduct item={itemdata.item} navigation={props.navigation} />
             )}
+            numColumns={2}
           />
         </View>
       </View>
