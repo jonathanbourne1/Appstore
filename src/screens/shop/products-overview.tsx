@@ -1,17 +1,18 @@
 import React, {FC} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
-  Button,
   Dimensions,
+  RefreshControl,
 } from 'react-native';
 //redux
 import {connect} from 'react-redux';
 //COMPONENTS
 import ItemProduct from '../../components/shop/itemProduct';
 import Header from '../../components/shop/header';
+import {GlobalState} from 'src/redux/reducer';
+
 //dimensions
 const {width, height} = Dimensions.get('screen');
 //INTERFACES
@@ -21,7 +22,25 @@ interface ItemData {
 interface Props {
   navigation: {
     push: () => {};
-    navigate: () => {};
+    navigate: () => void;
+  };
+  products: [
+    {
+      id: string;
+      ownerId: string;
+      title: string;
+      imageUrl: string;
+      description: string;
+      price: number;
+    },
+  ];
+  userProduct: {
+    id: string;
+    ownerId: string;
+    title: string;
+    imageUrl: string;
+    description: string;
+    price: number;
   };
 }
 //STYLES
@@ -30,38 +49,46 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     flex: 1,
+    width: '100%',
   },
 });
+
 //FUNCTIONS FROM REDUX
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: GlobalState) => {
   return {
-    products: state,
-    userProduct: state,
+    products: state.products.stateProducts,
+    userProducts: state.products.userProducts,
   };
 };
 
 //SCREEN
 const ProductsOverView: FC<Props> = (props) => {
-  // console.log('PROPS: ', props);
+  console.log('products overview 50: ', props.perro);
 
   //console.log('PRODUCTS: ', props.products.product.products);
   //console.log('USERPRODUCTS: ', props.userProduct.product.userProducts);
-  const LISTOFPRODUCTS: State = props.products.product.products;
+  const LISTOFPRODUCTS = props.products;
   return (
     <View style={styles.container}>
-      <View style={{width: '100%'}}>
-        <View>
-          <Header />
-        </View>
-        <View style={{height: height / 1.39}}>
-          <FlatList
-            data={LISTOFPRODUCTS}
-            renderItem={(itemdata) => (
-              <ItemProduct item={itemdata.item} navigation={props.navigation} />
-            )}
-            numColumns={2}
-          />
-        </View>
+      <Header />
+      <View style={{flex: 1}}>
+        <FlatList
+          data={LISTOFPRODUCTS}
+          renderItem={(itemdata) => (
+            <ItemProduct item={itemdata.item} navigation={props.navigation} />
+          )}
+          numColumns={2}
+          refreshControl={
+            <RefreshControl
+              refreshing={false}
+              onRefresh={() => {}}
+              tintColor={'red'}
+              title={'refersh'}
+              titleColor={'black'}
+              colors={['blue']}
+            />
+          }
+        />
       </View>
     </View>
   );

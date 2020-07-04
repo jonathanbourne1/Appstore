@@ -1,15 +1,14 @@
 import React, {FC} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  PushNotificationIOS,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+interface Props {
+  title: string;
+  price: number;
+  navigation: {push: (route: string, object) => void};
+  item: object;
+}
 
-const ImageButton: FC<{}> = ({title, price, navigation, item}) => {
-  console.log(navigation);
+const ImageButton: FC<Props> = ({title, price, navigation, item}) => {
+  console.log('image button: L18 ', navigation);
   return (
     <>
       <TouchableOpacity

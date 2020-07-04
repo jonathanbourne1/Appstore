@@ -1,5 +1,8 @@
 import {combineReducers} from 'redux';
-import products from './products-reducer';
+import products, {ProductState} from './products-reducer';
 
+export interface GlobalState {
+  products: ProductState;
+}
 //resultan reducer
-export default combineReducers({product: products});
+export default combineReducers<GlobalState>({products: products});

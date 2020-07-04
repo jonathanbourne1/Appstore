@@ -1,16 +1,6 @@
 import React, {FC} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  ImageBackground,
-  Dimensions,
-} from 'react-native';
-import Colors from '../../constants/colors';
-import Icon from 'react-native-ionicons';
+import {View, StyleSheet, Image} from 'react-native';
+
 import ImageButton from './ImageButton';
 
 //INTERFACE
@@ -39,7 +29,7 @@ const styles = StyleSheet.create({
 });
 
 const ItemProduct: FC<Props> = (props) => {
-  console.log('PROPS :', props);
+  console.log('itemProduct 33 :', props);
   return (
     <>
       <View style={styles.container}>
